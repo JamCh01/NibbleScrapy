@@ -53,7 +53,7 @@ SPIDER_MIDDLEWARES = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'content.middlewares.ContentDownloaderMiddleware': 543,
+#    'nibble.middlewares.ContentDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -65,7 +65,7 @@ SPIDER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'content.pipelines.ContentPipeline': 300,
+   'nibble.pipelines.ContentPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
