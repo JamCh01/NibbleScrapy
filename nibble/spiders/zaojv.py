@@ -1,7 +1,7 @@
 import scrapy
 import hashlib
 from bs4 import BeautifulSoup
-from content.items import ContentItem
+from nibble.items import ContentItem
 
 
 class Zaojv(scrapy.Spider):
