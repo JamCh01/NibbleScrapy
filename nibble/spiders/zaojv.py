@@ -68,5 +68,5 @@ class Zaojv(scrapy.Spider):
             item.get('url').encode('utf8')).hexdigest()
         item['work'] = ''
         item['platform'] = 2
-        item['status'] = 200
+        item['status'] = 300
         yield item
