@@ -1,0 +1,2 @@
+# nibbles
+Scrapy for nibbles
