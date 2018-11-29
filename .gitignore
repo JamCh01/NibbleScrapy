@@ -104,5 +104,5 @@ venv.bak/
 .mypy_cache/
 
 
-# scrapy pipelines
-/nibble/pipelines.py
+# scrapy static
+/nibble/static.py
