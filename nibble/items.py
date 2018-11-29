@@ -14,8 +14,6 @@ class ContentItem(scrapy.Item):
     content = scrapy.Field()
     url = scrapy.Field()
     author = scrapy.Field()
-    content_hash = scrapy.Field()
-    url_hash = scrapy.Field()
     work = scrapy.Field()
     platform = scrapy.Field()
     status = scrapy.Field()

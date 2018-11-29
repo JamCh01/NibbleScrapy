@@ -65,6 +65,7 @@ SPIDER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    'nibble.pipelines.DuplicatesPipeline': 300,
     'nibble.pipelines.ContentPipeline': 300,
 }
 
@@ -88,5 +89,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-LOG_LEVEL = 'ERROR'
+LOG_LEVEL = 'INFO'
 DNSCACHE_ENABLED = True
