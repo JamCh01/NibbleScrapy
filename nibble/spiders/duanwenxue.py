@@ -37,7 +37,6 @@ class Duanwenxue(scrapy.Spider):
     def parse_item(self, response):
         item = ContentItem()
         soup = BeautifulSoup(markup=response.text, features='lxml')
-        print(response.url)
         try:
             soup.find(name='span', attrs={'id': 'audio-span'}).decompose()
         except Exception:
