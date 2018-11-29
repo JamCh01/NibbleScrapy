@@ -7,7 +7,7 @@ class Duanwenxue(scrapy.Spider):
     name = "duanwenxue"
     allowed_domains = ['www.duanwenxue.com']
     start_urls = [
-        'https://www.duanwenxue.com/yulu/yijuhua/',
+        # 'https://www.duanwenxue.com/yulu/yijuhua/',
         'https://www.duanwenxue.com/yuju/youmei/',
         'https://www.duanwenxue.com/duanwen/geyan/',
     ]
@@ -17,7 +17,10 @@ class Duanwenxue(scrapy.Spider):
         box = soup.find(name='div', attrs={'class': 'list-short-article'})
         items = box.find_all(name='li')
         for item in items:
-            url = item.find(name='a')['href']
+            if 'geyan' in response.url or 'youmei' in response.url:
+                url = item.find(name='a', attrs={'target': '_blank'})['href']
+            else:
+                url = item.find(name='a')['href']
             yield scrapy.Request(
                 url=response.urljoin(url), callback=self.parse_item)
 
@@ -34,6 +37,7 @@ class Duanwenxue(scrapy.Spider):
     def parse_item(self, response):
         item = ContentItem()
         soup = BeautifulSoup(markup=response.text, features='lxml')
+        print(response.url)
         try:
             soup.find(name='span', attrs={'id': 'audio-span'}).decompose()
         except Exception:
