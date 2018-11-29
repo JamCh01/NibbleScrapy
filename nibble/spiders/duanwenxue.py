@@ -6,7 +6,11 @@ from nibble.items import ContentItem
 class Duanwenxue(scrapy.Spider):
     name = "duanwenxue"
     allowed_domains = ['www.duanwenxue.com']
-    start_urls = ['https://www.duanwenxue.com/yulu/yijuhua/']
+    start_urls = [
+        'https://www.duanwenxue.com/yulu/yijuhua/',
+        'https://www.duanwenxue.com/yuju/youmei/',
+        'https://www.duanwenxue.com/duanwen/geyan/',
+    ]
 
     def parse(self, response):
         soup = BeautifulSoup(markup=response.text, features='lxml')
