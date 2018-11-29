@@ -1,3 +1,4 @@
+import re
 import scrapy
 import hashlib
 from bs4 import BeautifulSoup
@@ -8,6 +9,10 @@ class Zaojv(scrapy.Spider):
     name = "zaojv"
     allowed_domains = ['zaojv.com']
     start_urls = ['http://zaojv.com/wordmj.html']
+
+    def __init__(self):
+        self.punctuation_regex = re.compile(
+            r'[\s+\.\!\/_,$%^*(+\"\')]+|[+——()?【】“”！，。？、~@#￥%……&*（）]+')
 
     def parse(self, response):
         soup = BeautifulSoup(markup=response.text, features='lxml')
@@ -52,20 +57,22 @@ class Zaojv(scrapy.Spider):
                 pass
 
     def parse_content(self, response):
+        url = response.url
+        url_hash = hashlib.md5(url.encode('utf8')).hexdigest()
         item = ContentItem()
         soup = BeautifulSoup(markup=response.text, features='lxml')
-        _content = soup.find(
-            name='td', attrs={
+        content = ''.join(
+            soup.find(name='td', attrs={
                 'style': 'padding-bottom:15px;'
-            }).text
-
+            }).text.strip().split())
+        content_without_punctuation = self.punctuation_regex.sub('', content)
+        content_hash = hashlib.md5(
+            content_without_punctuation.encode('utf8')).hexdigest()
         item['url'] = response.url
-        item['content'] = _content
+        item['content'] = content
         item['author'] = response.meta.get('author')
-        item['content_hash'] = hashlib.md5(
-            item.get('content').encode('utf8')).hexdigest()
-        item['url_hash'] = hashlib.md5(
-            item.get('url').encode('utf8')).hexdigest()
+        item['content_hash'] = content_hash
+        item['url_hash'] = url_hash
         item['work'] = ''
         item['platform'] = 2
         item['status'] = 300
